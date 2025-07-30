@@ -22,10 +22,12 @@ const { app, BrowserWindow } = require('electron');
          webPreferences: {
            nodeIntegration: false,
            contextIsolation: true,
-           webSecurity: false, // Allows iframe/webview access for URL tracking
+           webSecurity: false,
            enableRemoteModule: false,
            preload: path.join(__dirname, 'preload.js'),
-           webviewTag: true
+           webviewTag: true,
+           allowRunningInsecureContent: true,
+           experimentalFeatures: true
          },
          icon: path.join(__dirname, 'assets', 'icon.png')
        });
