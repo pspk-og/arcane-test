@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Reader & Downloader</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <div class="sidebar-header">
+                <h3>Modules</h3>
+            </div>
+            <div class="module-buttons">
+                <button class="module-btn" data-module="asura" data-url="https://asuracomic.net">
+                    <div class="module-icon">A</div>
+                    <span class="module-name">Asura</span>
+                </button>
+                
+                <button class="module-btn" data-module="colamanga" data-url="https://www.colamanga.com">
+                    <div class="module-icon">C</div>
+                    <span class="module-name">Colamanga</span>
+                </button>
+                
+                <button class="module-btn" data-module="erosscans" data-url="https://erosscans.xyz">
+                    <div class="module-icon">E</div>
+                    <span class="module-name">ErosScans</span>
+                </button>
+                
+                <button class="module-btn adult-mode" data-module="hentai2read" data-url="https://hentai2read.com">
+                    <div class="module-icon">H2R</div>
+                    <span class="module-name">Hentai2Read</span>
+                </button>
+                
+                <button class="module-btn adult-mode" data-module="hitomi" data-url="https://hitomi.la">
+                    <div class="module-icon">H</div>
+                    <span class="module-name">Hitomi</span>
+                </button>
+                
+                <button class="module-btn adult-mode" data-module="nhentai" data-url="https://nhentai.net">
+                    <div class="module-icon">N</div>
+                    <span class="module-name">nHentai</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Center Browser -->
+        <div class="center-content">
+            <div class="browser-header">
+                <input type="text" class="url-display" id="urlDisplay" placeholder="Enter URL and press Enter..." readonly>
+                <div class="browser-controls">
+                    <button id="goBtn" class="control-btn" title="Go" style="display: none;">→</button>
+                    <button id="refreshBtn" class="control-btn" title="Refresh">↻</button>
+                    <button id="backBtn" class="control-btn" title="Back">←</button>
+                    <button id="forwardBtn" class="control-btn" title="Forward">→</button>
+                </div>
+            </div>
+            <div class="browser-container" id="browserContainer">
+                <webview 
+                    id="browserFrame" 
+                    src="about:blank"
+                    style="width: 100%; height: 100%; border: none;"
+                    webpreferences="contextIsolation, nativeWindowOpen, javascript=yes, webSecurity=no"
+                    allowpopups
+                ></webview>
+                <div class="browser-placeholder" id="browserPlaceholder">
+                    <div class="placeholder-content">
+                        <h2>Welcome to Manga Reader & Downloader</h2>
+                        <p>Select a module from the left sidebar to get started</p>
+                        <div class="placeholder-icon">📚</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="sidebar-header">
+                <h3>Controls</h3>
+            </div>
+            
+            <div class="control-section">
+                <label class="control-label">Browser</label>
+                <div class="toggle-container">
+                    <input type="checkbox" id="browserToggle" class="toggle-input">
+                    <label for="browserToggle" class="toggle-label">
+                        <span class="toggle-text" data-on="ON" data-off="OFF"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <label class="control-label">Mode</label>
+                <div class="mode-toggle-container">
+                    <input type="checkbox" id="adultMode" class="toggle-input">
+                    <label for="adultMode" class="mode-toggle-label">
+                        <span class="mode-text" data-regular="Regular" data-adult="Adult"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <label class="control-label">URL</label>
+                <div class="url-input-container">
+                    <input type="text" id="urlInput" placeholder="Enter or paste URL..." class="url-input">
+                    <button id="pasteBtn" class="paste-btn" title="Paste from browser">📋</button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <label class="control-label">Download Options</label>
+                <div class="download-options" id="downloadOptions" style="display: none;">
+                    <input type="text" id="titleInput" placeholder="Custom title (optional)" class="option-input">
+                    <div class="chapter-inputs" id="chapterInputs" style="display: none;">
+                        <input type="number" id="startChapter" placeholder="Start chapter" class="option-input small">
+                        <input type="number" id="endChapter" placeholder="End chapter" class="option-input small">
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <button id="downloadBtn" class="download-btn" disabled>
+                    <span class="btn-text">Download</span>
+                    <span class="btn-icon">⬇</span>
+                </button>
+            </div>
+
+            <div class="control-section">
+                <label class="control-label">Download Folder</label>
+                <div class="folder-selection">
+                    <input type="text" id="downloadPath" class="path-input" placeholder="Choose download folder..." readonly>
+                    <button id="chooseFolderBtn" class="folder-btn" title="Choose Folder">📁</button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <button id="openDownloadsBtn" class="secondary-btn">
+                    <span class="btn-text">Open Downloads</span>
+                    <span class="btn-icon">📂</span>
+                </button>
+            </div>
+
+            <div class="status-section">
+                <div class="status-display" id="statusDisplay">
+                    <span class="status-text">Ready</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
